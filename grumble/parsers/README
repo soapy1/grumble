@@ -1,0 +1,2 @@
+Files in here read the raw input and parse it into a format that is useful for
+instantiating UnifiedEnvModel objects

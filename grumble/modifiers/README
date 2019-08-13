@@ -1,0 +1,2 @@
+These are extra bits that modify the environment somehow or run arbitrary shell
+commands that can't be captured in a package for whatever reason.

@@ -1,0 +1,7 @@
+[report]
+omit =
+    setup.py
+    grumble/__main__.py
+    grumble/_version.py
+    versioneer.py
+    tests/*
