@@ -5,16 +5,8 @@ import copy
 
 
 class CondaEnvironmentProvider(EnvironmentProviderInterface):
-    def __init__(self, *args, **kw):
-        self.channels = kw.get('channels')
-        self.pinned_packages = kw.get('pinned_packages')
-        self.default_channels = kw.get('default_channels')
-        self.channel_priority = kw.get('channel_priority')
-        self.track_features = kw.get('track_features')
-        self.subdirs = kw.get('subdirs')
-        self.channel_alias = kw.get('channel_alias')
-        self.frozen = kw.get('frozen', False)
-        self.specs = kw.get('packages', tuple())
+    def __init__(self, environment_model):
+        self.envionrment_model = environment_model
 
     def install(self, prefix):
         frozen_env = self
