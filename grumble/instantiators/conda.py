@@ -1,7 +1,11 @@
 from .interface import EnvironmentProviderInterface
 
+import conda
+import copy
+
+
 class CondaEnvironmentProvider(EnvironmentProviderInterface):
-    def __init__(*args, **kw):
+    def __init__(self, *args, **kw):
         self.channels = kw.get('channels')
         self.pinned_packages = kw.get('pinned_packages')
         self.default_channels = kw.get('default_channels')

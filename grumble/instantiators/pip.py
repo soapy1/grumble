@@ -1,3 +1,6 @@
+from .interface import EnvironmentProviderInterface
+
+
 class PipEnvironmentProvider(EnvironmentProviderInterface):
     def install(self):
         pass

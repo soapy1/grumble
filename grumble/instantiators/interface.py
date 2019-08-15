@@ -1,5 +1,5 @@
 class EnvironmentProviderInterface(object):
-    def install(pass, prefix):
+    def install(self, prefix):
         raise NotImplementedError
 
     def freeze(self, subdir=None):
