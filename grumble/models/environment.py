@@ -3,8 +3,7 @@ import copy
 
 class Environment(object):
 
-    def __init__(self, path, conda_packages, pip_packages, config):
-        self.path = path
+    def __init__(self, conda_packages, pip_packages, config):
         self.conda_packages = conda_packages
         self.pip_packages = pip_packages
         self.config = config
@@ -17,8 +16,8 @@ class Environment(object):
 
 
 class Config(object):
-    def __init__(self, channels, channel_alias, pinned_packages, default_channels,
-                 channel_priority, track_features, subdirs):
+    def __init__(self, channels=None, channel_alias=None, pinned_packages=None, default_channels=None,
+                 channel_priority=None, track_features=None, subdirs=None):
         self.channels = channels
         self.channel_alias = channel_alias
         self.pinned_packages = pinned_packages
