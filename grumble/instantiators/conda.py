@@ -1,6 +1,7 @@
 from .interface import EnvironmentProviderInterface
 
 from conda.api import Solver, TransactionHandler
+from conda_env import pip_util
 import copy
 
 
@@ -10,12 +11,18 @@ class CondaEnvironmentProvider(EnvironmentProviderInterface):
 
     def install(self, prefix):
         specs = [pkg.to_matchspec() for pkg in self.envionrment_model.conda_packages]
-        solver = Solver(
-            prefix, self.envionrment_model.config.channels,
-            subdirs=self.envionrment_model.config.subdirs, specs_to_add=specs
-        )
-        unlink_link_transaction = solver.solve_for_transaction()
-        TransactionHandler(unlink_link_transaction).execute(prefix, self.envionrment_model.conda_packages, True)
+        if len(specs) > 0:
+            solver = Solver(
+                prefix, self.envionrment_model.config.channels,
+                subdirs=self.envionrment_model.config.subdirs, specs_to_add=specs
+            )
+            unlink_link_transaction = solver.solve_for_transaction()
+            TransactionHandler(unlink_link_transaction).execute(prefix, self.envionrment_model.conda_packages, True)
+
+        pip_pkgs = ["%s==%s" %(pkg.name, pkg.version) for pkg in self.envionrment_model.pip_packages]
+        if len(pip_pkgs) >0:
+            pip_args = ["install"] + pip_pkgs
+            pip_util.pip_subprocess(pip_args, prefix, None)
 
     def freeze(self, subdir=None):
         new_obj = copy.deepcopy(self.__dict__)
