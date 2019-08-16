@@ -3,10 +3,11 @@ import copy
 
 class Environment(object):
 
-    def __init__(self, conda_packages, pip_packages, config):
+    def __init__(self, conda_packages, pip_packages, config, env_vars=None):
         self.conda_packages = conda_packages
         self.pip_packages = pip_packages
         self.config = config
+        self.env_vars = env_vars
 
     def serialize(self, fn, filetype="yaml"):
         pass
