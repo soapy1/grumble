@@ -10,6 +10,7 @@ class CondaEnvironmentProvider(EnvironmentProviderInterface):
 
     def install(self, prefix):
         specs = [pkg.to_matchspec() for pkg in self.envionrment_model.conda_packages]
+        import ipdb; ipdb.set_trace()
 
         solver = Solver(
             prefix, self.envionrment_model.config.channels,

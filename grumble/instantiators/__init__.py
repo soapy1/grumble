@@ -1,6 +1,6 @@
 from .conda import CondaEnvironmentProvider
-from .pip import PipenvEnvironmentProvider
+from .pip import PipEnvironmentProvider
 
 __all__ = [CondaEnvironmentProvider,
-           PipenvEnvironmentProvider
+           PipEnvironmentProvider
 ]
