@@ -25,4 +25,5 @@ class Config(object):
         self.channel_priority = channel_priority
         self.tracked_features = track_features
         self.subdirs = subdirs
+        # NOTE: does pip_interop need to go here too?
 

@@ -1,6 +1,6 @@
 from .interface import EnvironmentProviderInterface
 
-import conda
+from conda.api import Solver, TransactionHandler
 import copy
 
 
@@ -9,18 +9,24 @@ class CondaEnvironmentProvider(EnvironmentProviderInterface):
         self.envionrment_model = environment_model
 
     def install(self, prefix):
-        frozen_env = self
-        if not self.frozen:
-            frozen_env = self.freeze()
-        conda.api.install(self.specs, prefix)
-        return frozen_env
+        specs = [pkg.to_matchspec() for pkg in self.envionrment_model.conda_packages]
+
+        solver = Solver(
+            prefix, self.envionrment_model.config.channels,
+            subdirs=self.envionrment_model.config.subdirs, specs_to_add=specs
+        )
+        unlink_link_transaction = solver.solve_for_transaction()
+        TransactionHandler(unlink_link_transaction).execute(prefix, self.envionrment_model.conda_packages, True)
 
     def freeze(self, subdir=None):
-        new_obj = copy.deepcopy(self.__dict__())
+        new_obj = copy.deepcopy(self.__dict__)
         # solve for specs with given info
         new_obj['packages'] = conda.api.solve()
         new_obj['frozen'] = True
         return CondaEnvironmentProvider(**new_obj)
+
+    def post_apply_steps(self):
+        raise NotImplementedError
 
     def merge(self, other):
         """Inheritance.
