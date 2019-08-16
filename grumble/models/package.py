@@ -35,4 +35,4 @@ class PipPackage(Package):
         self.version = version
 
     def to_matchspec(self):
-        pass
+        return MatchSpec(name=self.name, version=self.version)
