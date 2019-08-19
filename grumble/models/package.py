@@ -14,7 +14,7 @@ class Package(ABC):
 
 class CondaPackage(Package):
 
-    def __init__(self, name, version, build_string, channel, subdir):
+    def __init__(self, name, version=None, build_string=None, channel=None, subdir=None):
         super(CondaPackage, self).__init__(name)
         self.version = version
         self.build_string = build_string
@@ -37,9 +37,12 @@ class CondaPackage(Package):
 
 class PipPackage(Package):
 
-    def __init__(self, name, version):
+    def __init__(self, name, version=None):
         super(PipPackage, self).__init__(name)
         self.version = version
 
     def to_matchspec(self):
-        return MatchSpec(name=self.name, version=self.version)
+        match_spec_dict = {}
+        if self.version:
+            match_spec_dict['version'] = self.version
+        return MatchSpec(name=self.name, **match_spec_dict)
