@@ -22,10 +22,17 @@ class CondaPackage(Package):
         self.subdir = subdir
 
     def to_matchspec(self):
-        return MatchSpec(
-            name=self.name, version=self.version, build=self.build_string,
-            channel=self.channel, subdir=self.subdir
-        )
+        match_spec_dict = {}
+        if self.version:
+            match_spec_dict['version'] = self.version
+        if self.build_string:
+            match_spec_dict['build_string'] = self.build_string
+        if self.channel:
+            match_spec_dict['channel'] = self.channel
+        if self.subdir:
+            match_spec_dict['subdir'] = self.subdir
+
+        return MatchSpec(name=self.name, **match_spec_dict)
 
 
 class PipPackage(Package):
