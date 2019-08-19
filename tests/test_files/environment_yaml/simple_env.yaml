@@ -1,11 +1,7 @@
-name: stats2
+name: simple_env
 channels:
-  - javascript
+  - defaults
 dependencies:
-  - python=3.4   # or 2.7
-  - bokeh=0.9.2
-  - numpy=1.9.*
-  - nodejs=0.10.*
+  - python
+  - bokeh
   - flask
-  - pip:
-    - Flask-Testing

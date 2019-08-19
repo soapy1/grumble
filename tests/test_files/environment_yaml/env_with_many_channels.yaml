@@ -1,0 +1,10 @@
+name: env_with_many_channels
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python
+  - imagesize
+  - compiler-rt=8.0.1
+  - pip:
+    - flask

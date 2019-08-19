@@ -1,0 +1,8 @@
+name: env_with_pip
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - imagesize
+  - pip:
+    - flask

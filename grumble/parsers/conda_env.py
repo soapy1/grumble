@@ -7,4 +7,4 @@ class CondaEnvParser(ParserInterface):
         pass
 
     def parse(self, env_file):
-        return Environment(path=None, conda_packages=None, pip_packages=None, config=None)
+        return Environment(conda_packages=None, pip_packages=None, config=None)
